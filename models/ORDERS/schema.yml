@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: bigquery_source
+    database: delta-trees-449603-i4       # Replace with your project
+    schema: staging         # Replace with your dataset
+    tables:
+      - name: orders
+models:
+    - name: transformed_orders
+      description: "Orders Transformed Table"
+      columns:
+          - name: order_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+      config:
+          materialized: table
+          alias: orders_rpt
